@@ -9,7 +9,7 @@
 #define NOMINMAX
 
 #include <iostream>
-#include <windows.h>
+//#include <windows.h>
 #include "SDL2/SDL.h"
 
 using namespace std;
