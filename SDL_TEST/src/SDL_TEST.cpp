@@ -19,6 +19,9 @@ cout<<status<<endl;
 int c;
 cin >> c;
 
+	if (c > 2)
+		cout << "you so pro" << endl;
+
 	return 0;
 
 
