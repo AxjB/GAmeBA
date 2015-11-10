@@ -1,28 +1,32 @@
-//============================================================================
-// Name        : SDL_TEST.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+#include <SDL2/SDL.h>
+#include "GraphicsView.h"
 
-
-#include <iostream>
-#include "SDL2/SDL.h"
-
-using namespace std;
+#define SCREEN_WIDTH 400
+#define SCREEN_HEIGHT 400
+#define ERROR_ON_INITIALIZATION 1
 
 int main(int argc, char* args[]) {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-int status = SDL_Init(SDL_INIT_EVERYTHING);
-cout<<status<<endl;
-int c;
-cin >> c;
+	SDL_Event e;
+	bool quitApplication = false;
+	GraphicsView mainView("First Window",SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	if (c > 2)
-		cout << "you so pro" << endl;
+	if (!mainView.initialize())
+		return ERROR_ON_INITIALIZATION;
+
+	mainView.createRender();
+	mainView.drawRect(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50,100,100);
+
+	while(!quitApplication) {
+		mainView.updateWindow();
+		SDL_Delay(20); /* 50 Hz */
+
+		 /* Handle events on queue */
+		while( SDL_PollEvent( &e ) != 0 ) { /* quit request */
+			if( e.type == SDL_QUIT ) {
+				quitApplication = true;
+			}
+		}
+	}
 
 	return 0;
-
-
 }
